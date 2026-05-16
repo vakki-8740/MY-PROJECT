@@ -20,5 +20,10 @@ def create_app():
 
     return app
 
+# backend/app.py ke end mein ye add karein
+
 if __name__ == '__main__':
     create_app().run(debug=True, port=5000)
+else:
+    # Production mode for Render
+    app = create_app()
