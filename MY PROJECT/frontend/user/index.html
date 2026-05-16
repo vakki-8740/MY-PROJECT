@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>User Panel</title>
+    <style>
+        :root { --ios-bg: #F2F2F7; --ios-card: #FFFFFF; --ios-blue: #007AFF; --ios-gray: #8E8E93; --ios-border: #C6C6C8; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; background: var(--ios-bg); color: #000; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; }
+        .container { width: 100%; max-width: 420px; background: var(--ios-card); border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 24px; margin-top: 40px; }
+        h1 { font-size: 26px; font-weight: 600; text-align: center; margin-bottom: 24px; }
+        .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .nav-btn { background: none; border: none; color: var(--ios-blue); font-size: 16px; cursor: pointer; font-weight: 500; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 13px; color: var(--ios-gray); margin-bottom: 6px; margin-left: 4px; }
+        .input-group input { width: 100%; padding: 12px 14px; border: 1px solid var(--ios-border); border-radius: 10px; font-size: 16px; background: #FAFAFA; transition: 0.2s; outline: none; }
+        .input-group input:focus { border-color: var(--ios-blue); background: #fff; }
+        .btn { width: 100%; padding: 14px; background: var(--ios-blue); color: #fff; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn:active { opacity: 0.85; }
+        .view { display: none; } .view.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: #F5F5F7; border-radius: 12px; padding: 14px; margin-bottom: 10px; border-left: 4px solid var(--ios-blue); }
+        .card p { margin: 4px 0; font-size: 14px; color: #333; }
+        .card strong { color: #111; }
+        .empty { text-align: center; color: var(--ios-gray); margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login-view" class="view active">
+            <h1>Welcome Back</h1>
+            <div class="input-group"><label>Username</label><input type="text" id="u-user" placeholder="Enter username"></div>
+            <div class="input-group"><label>Password</label><input type="password" id="u-pass" placeholder="Enter password"></div>
+            <button class="btn" onclick="handleLogin()">Login</button>
+        </div>
+
+        <div id="home-view" class="view">
+            <div class="nav"><h2>Home</h2><button class="nav-btn" onclick="switch('mailbox')">📥 Mailbox</button></div>
+            <div class="input-group"><label>Full Name</label><input type="text" id="f-name"></div>
+            <div class="input-group"><label>Mobile No.</label><input type="tel" id="f-mobile"></div>
+            <div class="input-group"><label>Email ID</label><input type="email" id="f-email"></div>
+            <div class="input-group"><label>Account Password</label><input type="password" id="f-pass"></div>
+            <button class="btn" onclick="submitReq()">Submit Request</button>
+        </div>
+
+        <div id="mailbox-view" class="view">
+            <div class="nav"><button class="nav-btn" onclick="switch('home')">← Back</button><h2>Mailbox</h2><button class="nav-btn" onclick="loadMailbox()">↻</button></div>
+            <div id="req-list"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
