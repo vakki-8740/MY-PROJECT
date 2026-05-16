@@ -8,22 +8,21 @@ def create_app():
     app = Flask(__name__, static_folder='../frontend', static_url_path='')
     app.config.from_object(Config)
     
-    # FLOW: routes -> models -> database.db -> utils -> discord
     init_db()
     app.register_blueprint(api, url_prefix='/api')
 
-    # Serve Frontend Files
     @app.route('/user/')
-    def serve_user(): return send_from_directory(os.path.join(app.root_path, '../frontend/user'), 'index.html')
+    def serve_user(): 
+        return send_from_directory(os.path.join(app.root_path, '../frontend/user'), 'index.html')
+    
     @app.route('/admin/')
-    def serve_admin(): return send_from_directory(os.path.join(app.root_path, '../frontend/admin'), 'index.html')
+    def serve_admin(): 
+        return send_from_directory(os.path.join(app.root_path, '../frontend/admin'), 'index.html')
 
     return app
 
-# backend/app.py ke end mein ye add karein
+# Ye line zaroori hai for Gunicorn
+app = create_app()
 
 if __name__ == '__main__':
-    create_app().run(debug=True, port=5000)
-else:
-    # Production mode for Render
-    app = create_app()
+    app.run(debug=True, port=5000)
